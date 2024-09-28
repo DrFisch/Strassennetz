@@ -15,19 +15,19 @@ public class Program
         strassennetzBuilder
             .AddStrasse("Strasse 1", strasse =>
             {
-                strasse.AddKurve("Kurve 1a")
-                       .AddGerade("Gerade 1a")
-                       .AddKurve("Kurve 1b");
+                strasse.AddKurve("Kurve 1a", 50)
+                       .AddGerade("Gerade 1a", 80)
+                       .AddKurve("Kurve 1b", 50);
             })
             .AddStrasse("Strasse 2", strasse =>
             {
-                strasse.AddGerade("Gerade 2a");
+                strasse.AddGerade("Gerade 2a", 80);
             })
             .AddStrasse("Strasse 3", strasse =>
             {
-                strasse.AddKurve("Kurve 3a")
-                       .AddGerade("Gerade 3a")
-                       .AddKurve("Kurve 3b");
+                strasse.AddKurve("Kurve 3a", 50)
+                       .AddGerade("Gerade 3a", 80)
+                       .AddKurve("Kurve 3b", 50);
             })
 
             // Erstellen des Parkplatzes A
@@ -90,7 +90,7 @@ public class Program
 
         // Beispiel für ein Auto, das auf Parkplatz A startet
         var parkplatzA = strassennetz.GetParkplatz("Parkplatz A");
-        var auto = new Auto("Auto 1", parkplatzA);
+        var auto = new Auto("Auto 1", parkplatzA, 25);
 
         // Auto fährt zur nächsten Verbindung
         for (int i = 0; i < 100; i++)
@@ -99,5 +99,5 @@ public class Program
             Thread.Sleep(1000);  // Warte 1 Sekunde
         }
     }
-}  // Fährt von Parkplatz A
+}  
 

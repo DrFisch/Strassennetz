@@ -11,11 +11,11 @@ namespace Straßenverkehr.Infrastruktur.Strassennetzelemente.Strassenelemente
 
     public class Gerade : BaseStrassenelement
     {
-        public Gerade(string name) : base(name) { }
+        public Gerade(string name, double laenge) : base(name, laenge) { }
 
         public override void Anzeigen()
         {
-            Console.WriteLine($"Gerade: {Name}");
+            Console.WriteLine($"Gerade: {Name}, Länge: {Laenge} Meter");
         }
     }
 }

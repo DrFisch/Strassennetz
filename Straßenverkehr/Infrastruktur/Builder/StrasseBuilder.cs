@@ -19,36 +19,18 @@ namespace Straßenverkehr.Infrastruktur.Builder
             _strasse = strasse;
         }
 
-        public StrasseBuilder AddGerade(string name)
+        public StrasseBuilder AddGerade(string name, double laenge)
         {
-            var gerade = new Gerade(name);
+            var gerade = new Gerade(name, laenge);
             _strasse.AddStrassenelement(gerade);
             return this;
         }
 
-        public StrasseBuilder AddKurve(string name)
+        public StrasseBuilder AddKurve(string name, double laenge)
         {
-            var kurve = new Kurve(name);
+            var kurve = new Kurve(name, laenge);
             _strasse.AddStrassenelement(kurve);
             return this;
         }
-
-        // Fügt eine bidirektionale Verbindung zu einer Kreuzung oder einem anderen StraßennetzElement hinzu
-        public StrasseBuilder AddVerbindung(StrassennetzElement element, BaseStrassenelement strassenelement = null)
-        {
-            if (strassenelement != null)
-            {
-                VerbindungsManager.AddVerbindung(_strasse.Name, new Verbindung(element, strassenelement));
-                VerbindungsManager.AddVerbindung(element.Name, new Verbindung(_strasse, strassenelement));
-            }
-            else
-            {
-                VerbindungsManager.AddVerbindung(_strasse.Name, new Verbindung(element));
-                VerbindungsManager.AddVerbindung(element.Name, new Verbindung(_strasse));
-            }
-            return this;
-        }
     }
-
-
 }

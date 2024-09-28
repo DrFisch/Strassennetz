@@ -11,17 +11,21 @@ using System.Collections.Generic;
 
 namespace Straßenverkehr.Fahrzeuge.Vehikel
 {
-    
+
 
     public class Auto
     {
         public string Name { get; set; }
         public StrassennetzElement AktuellePosition { get; private set; }
+        public StrassennetzElement VorherigePosition { get; private set; }
+        public double Geschwindigkeit { get; set; }  // Geschwindigkeit in Metern pro Sekunde
 
-        public Auto(string name, StrassennetzElement startPosition)
+        public Auto(string name, StrassennetzElement startPosition, double geschwindigkeit)
         {
             Name = name;
             AktuellePosition = startPosition;
+            VorherigePosition = null;  // Initial keine vorherige Position
+            Geschwindigkeit = geschwindigkeit;
             Console.WriteLine($"{Name} startet auf {AktuellePosition.Name}.");
         }
 
@@ -30,9 +34,19 @@ namespace Straßenverkehr.Fahrzeuge.Vehikel
         {
             var verbindungen = VerbindungsManager.GetVerbindungen(AktuellePosition.Name);
 
+            // Überprüfen, ob es eine Sackgasse ist (nur eine Verbindung)
+            if (verbindungen.Count > 1)
+            {
+                // Entferne die Möglichkeit, zur vorherigen Position zurückzufahren, wenn es mehr als eine Option gibt
+                verbindungen.RemoveAll(v => v.ZielElement == VorherigePosition);
+            }
+
             if (verbindungen.Count > 0)
             {
                 var naechsteVerbindung = WähleNaechsteVerbindung(verbindungen);
+
+                // Speichern der aktuellen Position als vorherige Position
+                VorherigePosition = AktuellePosition;
 
                 // Prüfen, ob die nächste Verbindung eine Straße ist
                 if (naechsteVerbindung.ZielElement is Strasse strasse)
@@ -58,7 +72,9 @@ namespace Straßenverkehr.Fahrzeuge.Vehikel
 
             while (aktuellesElement != null)
             {
-                Console.WriteLine($"{Name} fährt durch {aktuellesElement.Strassenelement.Name} auf {strasse.Name}.");
+                double zeitInSekunden = aktuellesElement.Strassenelement.Laenge / Geschwindigkeit;
+                Console.WriteLine($"{Name} fährt durch {aktuellesElement.Strassenelement.Name} ({aktuellesElement.Strassenelement.Laenge} Meter), das dauert {zeitInSekunden:F2} Sekunden.");
+                Thread.Sleep((int)(zeitInSekunden * 1000));  // Wartezeit in Millisekunden
                 aktuellesElement = aktuellesElement.Nächste; // Zum nächsten Straßenelement
             }
 
@@ -71,7 +87,7 @@ namespace Straßenverkehr.Fahrzeuge.Vehikel
         {
             if (verbindungen.Count == 1)
             {
-                return verbindungen[0]; // Wenn es nur eine Verbindung gibt
+                return verbindungen[0]; // Wenn es nur eine Verbindung gibt, muss das Auto diesen Weg nehmen
             }
 
             // Beispiel: Zufällige Auswahl einer der möglichen Verbindungen
@@ -81,5 +97,4 @@ namespace Straßenverkehr.Fahrzeuge.Vehikel
             return verbindungen[index];
         }
     }
-
 }

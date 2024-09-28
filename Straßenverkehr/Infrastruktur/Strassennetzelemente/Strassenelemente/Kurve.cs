@@ -10,11 +10,11 @@ namespace Straßenverkehr.Infrastruktur.Strassennetzelemente.Strassenelemente
 {
     public class Kurve : BaseStrassenelement
     {
-        public Kurve(string name) : base(name) { }
+        public Kurve(string name, double laenge) : base(name, laenge) { }
 
         public override void Anzeigen()
         {
-            Console.WriteLine($"Kurve: {Name}");
+            Console.WriteLine($"Kurve: {Name}, Länge: {Laenge} Meter");
         }
     }
 }
