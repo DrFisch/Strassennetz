@@ -10,7 +10,8 @@ namespace Straßenverkehr.Infrastruktur.Builder
     public class StrassenNetzBuilder
     {
         private readonly StrassenNetz _strassennetz;
-        private readonly Dictionary<string, Strasse> _strassen = new Dictionary<string, Strasse>(); // Neue Sammlung für gespeicherte Straßen
+        private readonly Dictionary<string, Strasse> _strassen = new Dictionary<string, Strasse>(); // Sammlung für gespeicherte Straßen
+        private readonly Dictionary<string, Parkplatz> _parkplaetze = new Dictionary<string, Parkplatz>(); // Sammlung für gespeicherte Parkplätze
 
         public StrassenNetzBuilder()
         {
@@ -31,11 +32,12 @@ namespace Straßenverkehr.Infrastruktur.Builder
         {
             var parkplatz = new Parkplatz(name);
             configure?.Invoke(parkplatz);
+            _parkplaetze[name] = parkplatz;  // Parkplatz speichern
             _strassennetz.AddElement(parkplatz);
             return this;
         }
 
-        // Fügt eine Strasse zum Netz hinzu
+        // Fügt eine Straße zum Netz hinzu
         public StrassenNetzBuilder AddStrasse(string name, Action<StrasseBuilder> buildStrasse)
         {
             var strasse = new Strasse(name);
@@ -45,9 +47,25 @@ namespace Straßenverkehr.Infrastruktur.Builder
             _strassennetz.AddElement(strasse);
             return this;
         }
+
+        // Methode, um eine Straße während des Bauens abzurufen
         public Strasse GetStrasse(string name)
         {
-            return _strassen[name];
+            if (_strassen.ContainsKey(name))
+            {
+                return _strassen[name];
+            }
+            throw new Exception($"Strasse {name} nicht gefunden.");
+        }
+
+        // Methode, um einen Parkplatz während des Bauens abzurufen
+        public Parkplatz GetParkplatz(string name)
+        {
+            if (_parkplaetze.ContainsKey(name))
+            {
+                return _parkplaetze[name];
+            }
+            throw new Exception($"Parkplatz {name} nicht gefunden.");
         }
 
         // Baut das fertige Strassennetz
@@ -56,5 +74,6 @@ namespace Straßenverkehr.Infrastruktur.Builder
             return _strassennetz;
         }
     }
+
 }
 

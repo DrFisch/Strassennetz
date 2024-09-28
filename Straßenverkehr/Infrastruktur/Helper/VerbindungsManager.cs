@@ -19,6 +19,16 @@ namespace Straßenverkehr.Infrastruktur.Helper
             Verbindungen[elementName].Add(verbindung);
         }
 
+        // Gibt alle möglichen Verbindungen für ein bestimmtes Element zurück
+        public static List<Verbindung> GetVerbindungen(string elementName)
+        {
+            if (Verbindungen.ContainsKey(elementName))
+            {
+                return Verbindungen[elementName];
+            }
+            return new List<Verbindung>();
+        }
+
         public static void Anzeigen()
         {
             Console.WriteLine("Verbindungen:");
@@ -39,6 +49,5 @@ namespace Straßenverkehr.Infrastruktur.Helper
             }
         }
     }
-
 
 }
