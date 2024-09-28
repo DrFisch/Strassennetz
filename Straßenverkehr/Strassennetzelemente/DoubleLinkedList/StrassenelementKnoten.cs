@@ -9,13 +9,14 @@ namespace Straßenverkehr.Strassennetzelemente.DoubleLinkedList
 {
     public class StrassenelementKnoten
     {
-        public Strassenelement Strassenelement { get; set; }
+        public BaseStrassenelement Strassenelement { get; set; }
         public StrassenelementKnoten Nächste { get; set; }
         public StrassenelementKnoten Vorherige { get; set; }
 
-        public StrassenelementKnoten(Strassenelement strassenelement)
+        public StrassenelementKnoten(BaseStrassenelement strassenelement)
         {
             Strassenelement = strassenelement;
         }
     }
+
 }

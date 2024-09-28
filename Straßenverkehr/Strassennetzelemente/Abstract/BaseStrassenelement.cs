@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Straßenverkehr.Strassennetzelemente.Abstract
 {
-    public abstract class Strassenelement
+    public abstract class BaseStrassenelement
     {
         public string Name { get; set; }
 
-        protected Strassenelement(string name)
+        protected BaseStrassenelement(string name)
         {
             Name = name;
         }

@@ -25,6 +25,15 @@ namespace Straßenverkehr.Builder
             return this;
         }
 
+        // Fügt einen Parkplatz zum Netz hinzu
+        public StrassenNetzBuilder AddParkplatz(string name, Action<Parkplatz> configure = null)
+        {
+            var parkplatz = new Parkplatz(name);
+            configure?.Invoke(parkplatz);
+            _strassennetz.AddElement(parkplatz);
+            return this;
+        }
+
         // Fügt eine Strasse zum Netz hinzu
         public StrassenNetzBuilder AddStrasse(string name, Action<StrasseBuilder> buildStrasse)
         {
@@ -32,15 +41,6 @@ namespace Straßenverkehr.Builder
             var strasseBuilder = new StrasseBuilder(strasse);
             buildStrasse(strasseBuilder);
             _strassennetz.AddElement(strasse);
-            return this;
-        }
-
-        // Fügt einen Parkplatz zum Netz hinzu
-        public StrassenNetzBuilder AddParkplatz(string name, Action<Parkplatz> configure = null)
-        {
-            var parkplatz = new Parkplatz(name);
-            configure?.Invoke(parkplatz);
-            _strassennetz.AddElement(parkplatz);
             return this;
         }
 

@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Straßenverkehr.Strassennetzelemente.Strassenelemente
 {
 
-    public class Gerade : Strassenelement
+    public class Gerade : BaseStrassenelement
     {
         public Gerade(string name) : base(name) { }
 
@@ -17,5 +18,4 @@ namespace Straßenverkehr.Strassennetzelemente.Strassenelemente
             Console.WriteLine($"Gerade: {Name}");
         }
     }
-
 }

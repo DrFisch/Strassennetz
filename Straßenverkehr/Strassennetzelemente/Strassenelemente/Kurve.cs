@@ -8,7 +8,7 @@ using Straßenverkehr.Strassennetzelemente.Abstract;
 
 namespace Straßenverkehr.Strassennetzelemente.Strassenelemente
 {
-    public class Kurve : Strassenelement
+    public class Kurve : BaseStrassenelement
     {
         public Kurve(string name) : base(name) { }
 

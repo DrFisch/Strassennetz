@@ -17,4 +17,5 @@ namespace Straßenverkehr.Strassennetzelemente
             Console.WriteLine($"Parkplatz: {Name}");
         }
     }
+
 }

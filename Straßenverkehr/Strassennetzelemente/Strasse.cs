@@ -17,7 +17,7 @@ namespace Straßenverkehr.Strassennetzelemente
 
         public Strasse(string name) : base(name) { }
 
-        public void AddStrassenelement(Strassenelement strassenelement)
+        public void AddStrassenelement(BaseStrassenelement strassenelement)
         {
             StrassenelementKnoten neuerKnoten = new StrassenelementKnoten(strassenelement);
 
@@ -34,12 +34,6 @@ namespace Straßenverkehr.Strassennetzelemente
             }
         }
 
-        // Fügt eine Verbindung zu einem anderen StrassennetzElement hinzu
-        public void AddVerbindung(StrassennetzElement element)
-        {
-            Verbindungen.Add(element);
-        }
-
         public override void Anzeigen()
         {
             Console.WriteLine($"Strasse: {Name}");
@@ -48,10 +42,6 @@ namespace Straßenverkehr.Strassennetzelemente
             {
                 aktuellerKnoten.Strassenelement.Anzeigen();
                 aktuellerKnoten = aktuellerKnoten.Nächste;
-            }
-            foreach (var verbindung in Verbindungen)
-            {
-                Console.WriteLine($"  Verbindung zu: {verbindung.Name}");
             }
         }
     }

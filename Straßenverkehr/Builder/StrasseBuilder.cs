@@ -1,4 +1,5 @@
-﻿using Straßenverkehr.Strassennetzelemente;
+﻿using Straßenverkehr.Helper;
+using Straßenverkehr.Strassennetzelemente;
 using Straßenverkehr.Strassennetzelemente.Abstract;
 using Straßenverkehr.Strassennetzelemente.Strassenelemente;
 using System;
@@ -32,12 +33,22 @@ namespace Straßenverkehr.Builder
             return this;
         }
 
-        // Fügt eine Verbindung (z. B. zu einem Parkplatz oder einer Kreuzung) hinzu
-        public StrasseBuilder AddVerbindung(StrassennetzElement element)
+        // Fügt eine bidirektionale Verbindung zu einer Kreuzung oder einem anderen StraßennetzElement hinzu
+        public StrasseBuilder AddVerbindung(StrassennetzElement element, BaseStrassenelement strassenelement = null)
         {
-            _strasse.AddVerbindung(element);
+            if (strassenelement != null)
+            {
+                VerbindungsManager.AddVerbindung(_strasse.Name, new Verbindung(element, strassenelement));
+                VerbindungsManager.AddVerbindung(element.Name, new Verbindung(_strasse, strassenelement));
+            }
+            else
+            {
+                VerbindungsManager.AddVerbindung(_strasse.Name, new Verbindung(element));
+                VerbindungsManager.AddVerbindung(element.Name, new Verbindung(_strasse));
+            }
             return this;
         }
     }
+
 
 }
