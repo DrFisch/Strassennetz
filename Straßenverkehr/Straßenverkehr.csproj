@@ -7,4 +7,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Fahrzeuge\Abstract\" />
+    <Folder Include="Fahrzeuge\Helper\" />
+    <Folder Include="Fahrzeuge\Vehikel\" />
+  </ItemGroup>
+
 </Project>

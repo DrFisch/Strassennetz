@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Straßenverkehr.Strassennetzelemente.Abstract;
+using Straßenverkehr.Infrastruktur.Strassennetzelemente.Abstract;
 
-namespace Straßenverkehr.Strassennetzelemente.Strassenelemente
+namespace Straßenverkehr.Infrastruktur.Strassennetzelemente.Strassenelemente
 {
     public class Kurve : BaseStrassenelement
     {

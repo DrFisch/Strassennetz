@@ -1,15 +1,16 @@
-﻿using Straßenverkehr.Strassennetzelemente;
+﻿using Straßenverkehr.Infrastruktur.Strassennetzelemente;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Straßenverkehr.Builder
+namespace Straßenverkehr.Infrastruktur.Builder
 {
     public class StrassenNetzBuilder
     {
         private readonly StrassenNetz _strassennetz;
+        private readonly Dictionary<string, Strasse> _strassen = new Dictionary<string, Strasse>(); // Neue Sammlung für gespeicherte Straßen
 
         public StrassenNetzBuilder()
         {
@@ -40,8 +41,13 @@ namespace Straßenverkehr.Builder
             var strasse = new Strasse(name);
             var strasseBuilder = new StrasseBuilder(strasse);
             buildStrasse(strasseBuilder);
+            _strassen[name] = strasse;  // Speichere die Straße
             _strassennetz.AddElement(strasse);
             return this;
+        }
+        public Strasse GetStrasse(string name)
+        {
+            return _strassen[name];
         }
 
         // Baut das fertige Strassennetz

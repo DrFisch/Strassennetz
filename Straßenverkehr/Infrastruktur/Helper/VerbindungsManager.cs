@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Straßenverkehr.Helper
+namespace Straßenverkehr.Infrastruktur.Helper
 {
     public static class VerbindungsManager
     {

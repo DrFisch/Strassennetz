@@ -1,12 +1,12 @@
-﻿using Straßenverkehr.Strassennetzelemente;
-using Straßenverkehr.Strassennetzelemente.Abstract;
+﻿using Straßenverkehr.Infrastruktur.Strassennetzelemente.Abstract;
+using Straßenverkehr.Infrastruktur.Strassennetzelemente;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Straßenverkehr.Helper
+namespace Straßenverkehr.Infrastruktur.Helper
 {
     public class Verbindung
     {

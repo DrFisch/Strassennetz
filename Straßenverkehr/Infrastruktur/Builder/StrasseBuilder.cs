@@ -1,14 +1,14 @@
-﻿using Straßenverkehr.Helper;
-using Straßenverkehr.Strassennetzelemente;
-using Straßenverkehr.Strassennetzelemente.Abstract;
-using Straßenverkehr.Strassennetzelemente.Strassenelemente;
+﻿using Straßenverkehr.Infrastruktur.Helper;
+using Straßenverkehr.Infrastruktur.Strassennetzelemente;
+using Straßenverkehr.Infrastruktur.Strassennetzelemente.Abstract;
+using Straßenverkehr.Infrastruktur.Strassennetzelemente.Strassenelemente;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Straßenverkehr.Builder
+namespace Straßenverkehr.Infrastruktur.Builder
 {
     public class StrasseBuilder
     {

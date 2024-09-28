@@ -1,31 +1,52 @@
-﻿using Straßenverkehr.Builder;
-using Straßenverkehr.Helper;
-using Straßenverkehr.Strassennetzelemente;
-using Straßenverkehr.Strassennetzelemente.Strassenelemente;
+﻿using Straßenverkehr.Infrastruktur.Builder;
+using Straßenverkehr.Infrastruktur.Helper;
+using Straßenverkehr.Infrastruktur.Strassennetzelemente.Strassenelemente;
+using Straßenverkehr.Infrastruktur.Strassennetzelemente;
 
 public class Program
 {
     public static void Main()
     {
         // Erstellen eines Strassennetzes mit dem Builder
-        // Erstellen eines Strassennetzes mit dem Builder
-        var strassennetz = new StrassenNetzBuilder()
-            // Kreuzung A Verbindungen
+        var strassennetzBuilder = new StrassenNetzBuilder();
+
+        // Zuerst die Strassen erstellen und im Builder speichern
+        strassennetzBuilder
+            .AddStrasse("Strasse 1", strasse =>
+            {
+                strasse.AddKurve("Kurve 1a")
+                       .AddGerade("Gerade 1a")
+                       .AddKurve("Kurve 2a");
+            })
+            .AddStrasse("Strasse 2", strasse =>
+            {
+                strasse.AddGerade("Gerade 1b");
+            })
+            .AddStrasse("Strasse 3", strasse =>
+            {
+                strasse.AddKurve("Kurve 1c")
+                       .AddGerade("Gerade 1c")
+                       .AddKurve("Kurve 2c");
+            });
+
+        // Kreuzung A Verbindungen
+        strassennetzBuilder
             .AddKreuzung("Kreuzung A", kreuzung =>
             {
                 var parkplatzA = new Parkplatz("Parkplatz A");
                 kreuzung.AddVerbindung(parkplatzA);  // Verbindung zu Parkplatz A
 
-                var strasse1 = new Strasse("Strasse 1");
-                var kurve1a = new Kurve("Kurve 1");
-                kreuzung.AddVerbindung(strasse1, kurve1a);  // Verbindung zu Strasse 1
+                // Hier wird dieselbe Straße 1 verwendet, die vorher erstellt wurde
+                var strasse1 = strassennetzBuilder.GetStrasse("Strasse 1"); // Hole die Straße 1 aus dem Builder
+                var kurve1a = strasse1.Kopf.Strassenelement as Kurve;  // Hole das erste Straßenelement (Kurve 1)
+                kreuzung.AddVerbindung(strasse1, kurve1a);  // Verbindung zu Kurve 1 der Strasse 1
 
-                var strasse2 = new Strasse("Strasse 2");
-                var gerade2a = new Gerade("Gerade 1");
+                var strasse2 = strassennetzBuilder.GetStrasse("Strasse 2");
+                var gerade2a = strasse2.Kopf.Strassenelement as Gerade;  // Hole das erste Straßenelement (Gerade 1)
                 kreuzung.AddVerbindung(strasse2, gerade2a);  // Verbindung zu Strasse 2
 
-                var strasse3 = new Strasse("Strasse 3");
-                var kurve3a = new Kurve("Kurve 1");
+                var strasse3 = strassennetzBuilder.GetStrasse("Strasse 3");
+                var kurve3a = strasse3.Kopf.Strassenelement as Kurve;  // Hole das erste Straßenelement (Kurve 1)
                 kreuzung.AddVerbindung(strasse3, kurve3a);  // Verbindung zu Strasse 3
             })
 
@@ -35,41 +56,25 @@ public class Program
                 var parkplatzB = new Parkplatz("Parkplatz B");
                 kreuzung.AddVerbindung(parkplatzB);  // Verbindung zu Parkplatz B
 
-                var strasse1 = new Strasse("Strasse 1");
-                var kurve1b = new Kurve("Kurve 2");
-                kreuzung.AddVerbindung(strasse1, kurve1b);  // Verbindung zu Strasse 1
+                var strasse1 = strassennetzBuilder.GetStrasse("Strasse 1");
+                var kurve1b = strasse1.Ende.Strassenelement as Kurve;  // Hole das letzte Straßenelement (Kurve 2)
+                kreuzung.AddVerbindung(strasse1, kurve1b);  // Verbindung zu Kurve 2 der Strasse 1
 
-                var strasse2 = new Strasse("Strasse 2");
-                var gerade2b = new Gerade("Gerade 2");
+                var strasse2 = strassennetzBuilder.GetStrasse("Strasse 2");
+                var gerade2b = strasse2.Kopf.Strassenelement as Gerade;  // Verbinde dasselbe erste Straßenelement (Gerade 1)
                 kreuzung.AddVerbindung(strasse2, gerade2b);  // Verbindung zu Strasse 2
 
-                var strasse3 = new Strasse("Strasse 3");
-                var kurve3b = new Kurve("Kurve 2");
-                kreuzung.AddVerbindung(strasse3, kurve3b);  // Verbindung zu Strasse 3
+                var strasse3 = strassennetzBuilder.GetStrasse("Strasse 3");
+                var kurve3b = strasse3.Ende.Strassenelement as Kurve;  // Hole das letzte Straßenelement (Kurve 2)
+                kreuzung.AddVerbindung(strasse3, kurve3b);  // Verbindung zu Kurve 2 der Strasse 3
             })
 
-            // Aufbau der Strassen
-            .AddStrasse("Strasse 1", strasse =>
-            {
-                strasse.AddKurve("Kurve 1")
-                       .AddGerade("Gerade 1")
-                       .AddKurve("Kurve 2");
-            })
-            .AddStrasse("Strasse 2", strasse =>
-            {
-                strasse.AddGerade("Gerade 1");
-            })
-            .AddStrasse("Strasse 3", strasse =>
-            {
-                strasse.AddKurve("Kurve 1")
-                       .AddGerade("Gerade 1")
-                       .AddKurve("Kurve 2");
-            })
             .Build();
 
-
         // Ausgabe des Strassennetzes und der Verbindungen
+        var strassennetz = strassennetzBuilder.Build();
         strassennetz.Anzeigen();
         VerbindungsManager.Anzeigen();
     }
+
 }

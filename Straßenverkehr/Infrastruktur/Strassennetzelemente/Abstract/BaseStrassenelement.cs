@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Straßenverkehr.Strassennetzelemente.Abstract
+namespace Straßenverkehr.Infrastruktur.Strassennetzelemente.Abstract
 {
-    public abstract class StrassennetzElement
+    public abstract class BaseStrassenelement
     {
         public string Name { get; set; }
 
-        protected StrassennetzElement(string name)
+        protected BaseStrassenelement(string name)
         {
             Name = name;
         }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Straßenverkehr.Strassennetzelemente.Abstract;
+using Straßenverkehr.Infrastruktur.Strassennetzelemente.Abstract;
 
-namespace Straßenverkehr.Strassennetzelemente.DoubleLinkedList
+namespace Straßenverkehr.Infrastruktur.Strassennetzelemente.DoubleLinkedList
 {
     public class StrassenelementKnoten
     {

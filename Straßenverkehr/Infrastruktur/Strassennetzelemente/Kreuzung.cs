@@ -1,5 +1,5 @@
-﻿using Straßenverkehr.Helper;
-using Straßenverkehr.Strassennetzelemente.Abstract;
+﻿using Straßenverkehr.Infrastruktur.Helper;
+using Straßenverkehr.Infrastruktur.Strassennetzelemente.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Straßenverkehr.Strassennetzelemente
+namespace Straßenverkehr.Infrastruktur.Strassennetzelemente
 {
     public class Kreuzung : StrassennetzElement
     {
@@ -19,12 +19,12 @@ namespace Straßenverkehr.Strassennetzelemente
             // Verbindung von Kreuzung zu Element
             if (strassenelement != null)
             {
-                VerbindungsManager.AddVerbindung(this.Name, new Verbindung(element, strassenelement));
+                VerbindungsManager.AddVerbindung(Name, new Verbindung(element, strassenelement));
                 VerbindungsManager.AddVerbindung(element.Name, new Verbindung(this, strassenelement));
             }
             else
             {
-                VerbindungsManager.AddVerbindung(this.Name, new Verbindung(element));
+                VerbindungsManager.AddVerbindung(Name, new Verbindung(element));
                 VerbindungsManager.AddVerbindung(element.Name, new Verbindung(this));
             }
         }

@@ -1,5 +1,5 @@
-﻿using Straßenverkehr.Strassennetzelemente.Abstract;
-using Straßenverkehr.Strassennetzelemente.DoubleLinkedList;
+﻿using Straßenverkehr.Infrastruktur.Strassennetzelemente.Abstract;
+using Straßenverkehr.Infrastruktur.Strassennetzelemente.DoubleLinkedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Straßenverkehr.Strassennetzelemente
+namespace Straßenverkehr.Infrastruktur.Strassennetzelemente
 {
     public class Strasse : StrassennetzElement
     {

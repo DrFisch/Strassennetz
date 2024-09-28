@@ -1,5 +1,5 @@
-﻿using Straßenverkehr.Strassennetzelemente;
-using Straßenverkehr.Strassennetzelemente.Abstract;
+﻿using Straßenverkehr.Infrastruktur.Strassennetzelemente.Abstract;
+using Straßenverkehr.Infrastruktur.Builder;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Straßenverkehr
+namespace Straßenverkehr.Infrastruktur
 {
     public class StrassenNetz
     {
